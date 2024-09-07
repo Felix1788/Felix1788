@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Instalar o mega e baixar os temas
+sudo apt install megatools -y
+megadl https://mega.nz/file/xBhWjCbK#y8Mif8t5F7-QAZTmIKsCO0jswpKCxonNVLIq6PbXbl4
+unxz candy-icons.tar.xz
+tar -xvf candy-icons.tar
+sudo mv candy-icons /usr/share/icons/
+
+megadl https://mega.nz/file/8cYzgbbK#sOKQzdojEgjxsLCe2LlSxRSvyO842bcF-cbkiImEP_8
+unxz WhiteSur-Dark.tar.xz
+tar -xvf WhiteSur-Dark.tar
+sudo mv WhiteSur-Dark /usr/share/themes/
+
+# Configurar temas GTK automaticamente
+THEME_DIR=~/.config/gtk-3.0/
+mkdir -p $THEME_DIR
+
+echo "[Settings]" > $THEME_DIR/settings.ini
+echo "gtk-theme-name = WhiteSur-Dark" >> $THEME_DIR/settings.ini
+echo "gtk-icon-theme-name = candy-icons" >> $THEME_DIR/settings.ini
+
+# Aplicar temas para todas as sessões (opcional)
+echo "gtk-theme-name=WhiteSur-Dark" | sudo tee -a /etc/gtk-3.0/settings.ini
+echo "gtk-icon-theme-name=candy-icons" | sudo tee -a /etc/gtk-3.0/settings.ini
